@@ -1,0 +1,356 @@
+{
+  "adminPassword": "admin",
+  "youtubeId": "dQw4w9WgXcQ",
+  "trialLink": "https://gestomni.com/signup",
+  "demoLink": "https://calendly.com/gestomni/demo",
+  "en": {
+    "meta": {
+      "title": "Gest'Omni - Enterprise-Grade Retail & Financial Management for Small Businesses",
+      "description": "Level the playing field. Get the exact same AI-powered tools, marketplace integrations, and financial tracking that retail giants spend millions on."
+    },
+    "nav": {
+      "features": "Features",
+      "mission": "Our Purpose",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "cta": "Get Started"
+    },
+    "hero": {
+      "badge": "🚀 LEVEL THE PLAYING FIELD",
+      "title": "Enterprise Power, Scaled for Local Retailers",
+      "subtitle": "Stop paying fortune for advanced systems. Gest'Omni gives you AI-powered inventory, Shopee & Mercado Livre sync, and immutable financial auditing to fight and win against retail giants.",
+      "ctaStart": "Start Free Trial",
+      "ctaWatch": "Watch App Presentation",
+      "videoTitle": "Watch the Gest'Omni Presentation"
+    },
+    "mission": {
+      "badge": "THE MISSION",
+      "title": "Why Gest'Omni Exists",
+      "description1": "For decades, retail giants have dominated the market by investing millions in advanced automation, predictive artificial intelligence, and global supply chain integrations.",
+      "description2": "Our mission is simple: to level the playing field. We package that exact same enterprise power into a clean, affordable, and incredibly easy-to-use application. Local shop owners, home artisans, and independent retailers now have the same technical capabilities as the largest corporations on earth.",
+      "stat1Number": "10x",
+      "stat1Text": "Faster Stock Management",
+      "stat2Number": "0%",
+      "stat2Text": "Unexplained Inventory Loss",
+      "stat3Number": "100%",
+      "stat3Text": "Control Over Cash Flow"
+    },
+    "features": {
+      "title": "Equipped with Enterprise-Grade Tools",
+      "subtitle": "Everything you need to manage, scale, and automate your retail or artisan business in a single workspace.",
+      "items": [
+        {
+          "id": "ai_invoice",
+          "title": "AI Invoice Parser (DANFE/XML)",
+          "description": "Drag and drop your XML or PDF DANFE invoice files. Our built-in Gemini AI extracts suppliers, items, quantities, and cost prices in seconds, adding them to stock automatically.",
+          "badge": "Gemini AI"
+        },
+        {
+          "id": "pos",
+          "title": "Point of Sale (POS / Checkout)",
+          "description": "A lightning-fast, intuitive checkout page. Search by name, scan barcodes, handle discount percentages, manage product variations, and process direct refunds instantly.",
+          "badge": "Fast Checkout"
+        },
+        {
+          "id": "audit",
+          "title": "Immutable Audit Ledger",
+          "description": "Sleep easy knowing your stock is fully audited. Any change triggers a system-wide secure PostgreSQL ledger tracking who, when, why, and the exact stock adjustments made.",
+          "badge": "Security"
+        },
+        {
+          "id": "market",
+          "title": "Marketplace Sync",
+          "description": "Synchronize your brick-and-mortar physical stock with online listings on Shopee and Mercado Livre. Sell a product in-store, and online stock updates automatically.",
+          "badge": "Multi-Channel"
+        },
+        {
+          "id": "finance",
+          "title": "Cash Flow & Consolidated DRE",
+          "description": "Understand your actual financial health. Consolidated revenues, cost of goods sold (CMV), fixed operating bills, and accounts payable are balanced automatically for real net profit tracking.",
+          "badge": "Accounting"
+        },
+        {
+          "id": "custom",
+          "title": "Artisan Custom Orders",
+          "description": "A production board tailored for tailors, artisans, and custom ateliers. Track deposits, down-payments, remaining balances, delivery deadlines, and dispatch alerts.",
+          "badge": "Atelier Focus"
+        },
+        {
+          "id": "partners",
+          "title": "Artisans & Partners Accounting",
+          "description": "Track raw materials (debits) handed to external artisans and finished items (credits) returned, calculating the net financial balance of each supplier automatically.",
+          "badge": "Collaboration"
+        },
+        {
+          "id": "ecommerce",
+          "title": "Online Storefront & Dispatch",
+          "description": "Launch your own integrated public e-commerce store. Customers buy online, Google Maps API computes exact shipping, and you get immediate WhatsApp dispatcher notifications.",
+          "badge": "Webstore"
+        },
+        {
+          "id": "devstudio",
+          "title": "DevStudio Layout Customizer",
+          "description": "Rearrange and resize widgets directly on your dashboard visual layout without code. Customize mobile/desktop rendering columns and shadows to match your workflow.",
+          "badge": "No-Code"
+        }
+      ]
+    },
+    "pricing": {
+      "title": "Simple, Transparent Pricing",
+      "subtitle": "No hidden fees. Pay monthly or save with our annual plans. All features included.",
+      "monthly": "Monthly",
+      "yearly": "Yearly (Save 20%)",
+      "perMonth": "/ month",
+      "perYear": "/ year",
+      "trialBtn": "Start 14-Day Free Trial",
+      "plans": [
+        {
+          "name": "Artisan Solo",
+          "priceMonthly": 29,
+          "priceYearly": 278,
+          "description": "Perfect for individual artisans and home-based creators.",
+          "features": [
+            "1 User / Operator",
+            "Artisans & Partners Ledger",
+            "Point of Sale (POS)",
+            "Manual Inventory Audit",
+            "Email & Community Support"
+          ],
+          "popular": false
+        },
+        {
+          "name": "Retail Growth",
+          "priceMonthly": 59,
+          "priceYearly": 566,
+          "description": "Designed for growing physical shops and active sellers.",
+          "features": [
+            "Unlimited Users & Operators",
+            "Gemini AI Invoice Parser (30/mo)",
+            "Shopee & Mercado Livre Sync",
+            "Integrated Public Webstore",
+            "Full Consolidated DRE & Cash Flow",
+            "Immutable Stock Auditing",
+            "Priority WhatsApp Support"
+          ],
+          "popular": true
+        },
+        {
+          "name": "Enterprise Scale",
+          "priceMonthly": 119,
+          "priceYearly": 1142,
+          "description": "For businesses managing high volume and multi-store setups.",
+          "features": [
+            "Everything in Growth Plan",
+            "Unlimited Gemini AI Invoice Parser",
+            "Custom Domain for Webstore",
+            "API Access & Custom Webhooks",
+            "24/7 Dedicated Account Manager"
+          ],
+          "popular": false
+        }
+      ]
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Got questions about Gest'Omni? We have answers.",
+      "items": [
+        {
+          "q": "Do I need technical skills to use Gest'Omni?",
+          "a": "Not at all. Gest'Omni is designed to be fully operational in minutes. The AI Invoice Parser reads XML/PDF files so you don't have to enter items manually, and our dashboard is completely visual."
+        },
+        {
+          "q": "How does Shopee and Mercado Livre sync work?",
+          "a": "Through standard secure APIs. You map your listing SKUs to physical inventory items. Whenever a checkout is finalized on your physical POS, Gest'Omni automatically triggers API updates to adjust stock levels online, avoiding double-selling."
+        },
+        {
+          "q": "What is the Immutable Audit Ledger?",
+          "a": "It is a security mechanism built directly into our database level. Every single inventory change (additions, sales, returns) registers a permanent audit row with details like timestamp, reason, and operator. This ledger cannot be edited or deleted, ensuring absolute honesty in your store data."
+        },
+        {
+          "q": "Can I cancel my subscription at any time?",
+          "a": "Yes, completely. There are no contracts or cancellation fees. You can unsubscribe directly from your billing panel with a single click."
+        }
+      ]
+    },
+    "footer": {
+      "tagline": "Empowering local retailers and artisans worldwide to stand strong against global giants.",
+      "adminPortal": "Admin Portal Access",
+      "rights": "All rights reserved. Powered by Supabase & Gemini AI."
+    }
+  },
+  "pt": {
+    "meta": {
+      "title": "Gest'Omni - Gestão Financeira e Vendas Nível Corporativo para Pequenos Negócios",
+      "description": "Nivele o jogo. Tenha as mesmas ferramentas de IA, integrações de marketplaces e auditoria de estoque que as grandes multinacionais gastam fortunas para ter."
+    },
+    "nav": {
+      "features": "Recursos",
+      "mission": "Nosso Propósito",
+      "pricing": "Planos",
+      "faq": "Dúvidas",
+      "cta": "Começar Agora"
+    },
+    "hero": {
+      "badge": "🚀 NIVELANDO O JOGO NO VAREJO",
+      "title": "Poder de Grande Empresa para o Pequeno Negócio",
+      "subtitle": "Chega de pagar fortunas por sistemas limitados. O Gest'Omni entrega IA para ler notas fiscais, sincronização automática com Shopee/Mercado Livre e auditoria de estoque imutável para você competir e vencer os gigantes do varejo.",
+      "ctaStart": "Começar Teste Grátis",
+      "ctaWatch": "Assistir Vídeo de Apresentação",
+      "videoTitle": "Assista à Apresentação do Gest'Omni"
+    },
+    "mission": {
+      "badge": "A MISSÃO",
+      "title": "Por que o Gest'Omni Existe",
+      "description1": "Por décadas, os grandes gigantes do varejo dominaram o mercado investindo milhões de dólares em automação avançada, inteligência artificial preditiva e cadeias de suprimentos integradas.",
+      "description2": "Nossa missão é simples: equilibrar a balança. Nós empacotamos exatamente esse mesmo poder corporativo em um aplicativo limpo, acessível e extremamente fácil de usar. Agora, lojistas locais, artesãos e pequenos comerciantes têm as mesmas capacidades tecnológicas que as maiores empresas do mundo pagam caro para possuir.",
+      "stat1Number": "10x",
+      "stat1Text": "Mais Rápido no Estoque",
+      "stat2Number": "0%",
+      "stat2Text": "Perda de Estoque Sem Explicação",
+      "stat3Number": "100%",
+      "stat3Text": "Controle do Fluxo de Caixa"
+    },
+    "features": {
+      "title": "Equipado com Recursos de Elite",
+      "subtitle": "Tudo o que você precisa para gerenciar, escalar e automatizar o seu negócio físico ou e-commerce em uma única tela.",
+      "items": [
+        {
+          "id": "ai_invoice",
+          "title": "Leitor de Notas com IA (DANFE/XML)",
+          "description": "Arraste e solte arquivos XML ou PDF de suas notas fiscais DANFE. Nossa IA Gemini integrada extrai fornecedores, produtos, quantidades e preços de custo em segundos, alimentando o estoque automaticamente.",
+          "badge": "Gemini AI"
+        },
+        {
+          "id": "pos",
+          "title": "Frente de Caixa (PDV Ágil)",
+          "description": "Uma tela de checkout ultrarrápida e intuitiva. Busque por nome, escaneie código de barras, aplique descontos em porcentagem ou valor, selecione variações e realize reembolsos integrados.",
+          "badge": "Vendas Rápidas"
+        },
+        {
+          "id": "audit",
+          "title": "Auditoria de Estoque Imutável",
+          "description": "Durma tranquilo sabendo que seu estoque é totalmente auditável. Qualquer movimentação aciona um gatilho seguro no banco de dados (PostgreSQL) registrando quem, quando, por que e as alterações exatas.",
+          "badge": "Segurança"
+        },
+        {
+          "id": "market",
+          "title": "Sincronização de Marketplaces",
+          "description": "Sincronize seu estoque físico com anúncios da Shopee e Mercado Livre. Vendeu na loja física? O estoque dos seus anúncios online é atualizado automaticamente em segundos.",
+          "badge": "Multicanal"
+        },
+        {
+          "id": "finance",
+          "title": "Fluxo de Caixa & DRE Consolidada",
+          "description": "Entenda a real saúde financeira da sua empresa. Receitas, custos de mercadorias vendidas (CMV), despesas operacionais fixas e contas a pagar são consolidados para calcular seu lucro líquido real.",
+          "badge": "Financeiro"
+        },
+        {
+          "id": "custom",
+          "title": "Encomendas e Produção sob Medida",
+          "description": "Um painel estilo Kanban sob medida para costureiras, artesãos e ateliês. Acompanhe adiantamentos, saldos devedores na entrega, prazos visuais e alertas de conclusão.",
+          "badge": "Foco em Ateliê"
+        },
+        {
+          "id": "partners",
+          "title": "Acerto de Parceiras e Artesãs",
+          "description": "Monitore matérias-primas e rolos de fios entregues a artesãs terceirizadas (débitos) e a entrega de produtos acabados (créditos), gerando o saldo financeiro a pagar de forma automática.",
+          "badge": "Colaboração"
+        },
+        {
+          "id": "ecommerce",
+          "title": "Loja Online & Painel de Entregas",
+          "description": "Tenha sua própria loja virtual pública para clientes comprarem online. Taxa de entrega calculada via Google Maps API, com acionamento de entregador e envio direto de dados via WhatsApp.",
+          "badge": "Loja Própria"
+        },
+        {
+          "id": "devstudio",
+          "title": "Personalizador Visual DevStudio",
+          "description": "Reorganize e altere o tamanho dos cards diretamente na tela sem mexer em código. Configure colunas para celular/computador e sombras que combinem com o seu fluxo de trabalho.",
+          "badge": "Sem Código"
+        }
+      ]
+    },
+    "pricing": {
+      "title": "Planos Simples e Transparentes",
+      "subtitle": "Sem taxas ocultas. Pague mensalmente ou economize com nossos planos anuais. Todos os recursos inclusos.",
+      "monthly": "Mensal",
+      "yearly": "Anual (Economize 20%)",
+      "perMonth": "/ mês",
+      "perYear": "/ ano",
+      "trialBtn": "Começar Teste de 14 Dias Grátis",
+      "plans": [
+        {
+          "name": "Artesão Solo",
+          "priceMonthly": 29,
+          "priceYearly": 278,
+          "description": "Perfeito para artesãos individuais e criadores que trabalham em casa.",
+          "features": [
+            "1 Usuário / Operador",
+            "Gestão de Parceiras e Artesãs",
+            "Frente de Caixa (PDV)",
+            "Auditoria de Estoque Manual",
+            "Suporte por E-mail e Comunidade"
+          ],
+          "popular": false
+        },
+        {
+          "name": "Varejo Crescimento",
+          "priceMonthly": 59,
+          "priceYearly": 566,
+          "description": "Ideal para lojas físicas em crescimento e vendedores ativos.",
+          "features": [
+            "Usuários e Operadores Ilimitados",
+            "Importador com IA Gemini (30 notas/mês)",
+            "Sincronização Shopee e Mercado Livre",
+            "Loja Virtual Integrada",
+            "DRE Consolidada e Fluxo de Caixa",
+            "Auditoria de Estoque Automática",
+            "Suporte prioritário via WhatsApp"
+          ],
+          "popular": true
+        },
+        {
+          "name": "Escala Enterprise",
+          "priceMonthly": 119,
+          "priceYearly": 1142,
+          "description": "Para empresas que gerenciam alto volume de vendas ou múltiplas lojas.",
+          "features": [
+            "Tudo do plano Crescimento",
+            "Leitor de Notas com IA Ilimitado",
+            "Domínio Personalizado para Loja Online",
+            "Acesso à API e Webhooks Personalizados",
+            "Gerente de Conta Dedicado 24/7"
+          ],
+          "popular": false
+        }
+      ]
+    },
+    "faq": {
+      "title": "Perguntas Frequentes",
+      "subtitle": "Ficou com alguma dúvida sobre o Gest'Omni? Nós respondemos.",
+      "items": [
+        {
+          "q": "Preciso de conhecimento técnico para usar o Gest'Omni?",
+          "a": "Nenhum. O Gest'Omni foi projetado para estar funcionando em poucos minutos. A inteligência artificial lê suas notas fiscais automaticamente para que você não precise digitar itens, e todo o painel é totalmente visual."
+        },
+        {
+          "q": "Como funciona a sincronização com Shopee e Mercado Livre?",
+          "a": "Usamos APIs oficiais e seguras. Você faz o mapeamento do código do anúncio (SKU) com o produto físico. Sempre que uma venda for concluída no PDV da sua loja física, o Gest'Omni avisa as plataformas para atualizar o estoque online automaticamente."
+        },
+        {
+          "q": "O que é a Auditoria de Estoque Imutável?",
+          "a": "É um sistema de segurança integrado direto no banco de dados. Qualquer alteração de estoque (entradas, vendas, devoluções) registra uma linha definitiva com data, hora, motivo e operador. Essa linha não pode ser alterada ou apagada, garantindo total controle."
+        },
+        {
+          "q": "Posso cancelar minha assinatura a qualquer momento?",
+          "a": "Sim, com certeza. Não existem contratos de fidelidade ou taxas de cancelamento. Você pode cancelar sua assinatura diretamente no painel de faturamento com um único clique."
+        }
+      ]
+    },
+    "footer": {
+      "tagline": "Empoderando comerciantes locais e artesãos para competirem e vencerem os gigantes do varejo global.",
+      "adminPortal": "Acesso Administrativo",
+      "rights": "Todos os direitos reservados. Desenvolvido com Supabase & Gemini AI."
+    }
+  }
+}
