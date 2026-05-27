@@ -669,6 +669,47 @@ window.toggleFaq = function(index) {
   }
 };
 
+/**
+ * Dynamic YouTube Link Parser to extract the 11-character video ID
+ * Supports full watch URLs, share links (youtu.be), embeds, and raw IDs
+ */
+function extractYoutubeId(urlOrId) {
+  if (!urlOrId) return "dQw4w9WgXcQ"; // Default fallback
+  urlOrId = urlOrId.trim();
+  
+  // 1. If it's already a clean 11-character ID, return it
+  if (urlOrId.length === 11 && !urlOrId.includes("/") && !urlOrId.includes("?")) {
+    return urlOrId;
+  }
+  
+  // 2. Try parsing using standard regex
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = urlOrId.match(regExp);
+  if (match && match[2].length === 11) {
+    return match[2];
+  }
+  
+  // 3. Fallback manual splits for short share links
+  if (urlOrId.includes("youtu.be/")) {
+    const parts = urlOrId.split("youtu.be/");
+    if (parts.length > 1) {
+      const idPart = parts[1].split("?")[0].split("/")[0];
+      if (idPart.length === 11) return idPart;
+    }
+  }
+  
+  // 4. Fallback manual splits for standard v= query parameters
+  if (urlOrId.includes("v=")) {
+    const parts = urlOrId.split("v=");
+    if (parts.length > 1) {
+      const idPart = parts[1].split("&")[0].split("#")[0];
+      if (idPart.length === 11) return idPart;
+    }
+  }
+
+  return urlOrId;
+}
+
 // --- YouTube API Video Loader ---
 function loadYoutubeVideo() {
   const placeholder = document.getElementById("video-placeholder");
@@ -696,8 +737,9 @@ function loadYoutubeVideo() {
 }
 
 function createYtPlayer() {
+  const cleanId = extractYoutubeId(siteConfig.youtubeId);
   ytPlayer = new YT.Player("player-container", {
-    videoId: siteConfig.youtubeId,
+    videoId: cleanId,
     playerVars: {
       autoplay: 1,
       modestbranding: 1,
@@ -988,12 +1030,17 @@ function setupAdminFormInputListeners() {
       const editLang = document.getElementById("edit-lang-select").value;
       const value = e.target.value;
 
+      let cleanedValue = value;
+      if (item.key === "youtubeId") {
+        cleanedValue = extractYoutubeId(value);
+      }
+
       if (item.type === "global") {
-        siteConfig[item.key] = value;
+        siteConfig[item.key] = cleanedValue;
       } else {
         // Nested path e.g. "hero.title"
         const [section, subkey] = item.key.split(".");
-        siteConfig[editLang][section][subkey] = value;
+        siteConfig[editLang][section][subkey] = cleanedValue;
       }
 
       // 1. Live preview: in-memory state updated
