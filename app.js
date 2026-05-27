@@ -9,6 +9,7 @@ const DEFAULT_CONFIG = {
   youtubeId: "dQw4w9WgXcQ",
   trialLink: "https://gestomni.com/signup",
   demoLink: "https://calendly.com/gestomni/demo",
+  googleAnalyticsId: "",
   en: {
     meta: {
       title: "Gest'Omni - Enterprise-Grade Retail & Financial Management for Small Businesses",
@@ -386,8 +387,37 @@ window.addEventListener("DOMContentLoaded", async () => {
   await loadConfiguration();
   detectUserLanguage();
   hydrateDOM();
+  initializeGoogleAnalytics();
   setupEventListeners();
 });
+
+/**
+ * Dynamically injects Google Analytics 4 Measurement Tag if configured.
+ */
+function initializeGoogleAnalytics() {
+  const gaId = siteConfig.googleAnalyticsId;
+  if (!gaId || gaId.trim() === "") return;
+
+  // Check if already injected
+  if (document.getElementById("ga-gtag-script")) return;
+
+  // 1. Load the external Google Analytics script
+  const gaScript = document.createElement("script");
+  gaScript.id = "ga-gtag-script";
+  gaScript.async = true;
+  gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+  document.head.appendChild(gaScript);
+
+  // 2. Setup global dataLayer and gtag function
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function() {
+    window.dataLayer.push(arguments);
+  };
+  window.gtag('js', new Date());
+  window.gtag('config', gaId);
+  
+  console.log(`Google Analytics initialized with ID: ${gaId}`);
+}
 
 /**
  * Loads the application configuration.
@@ -829,6 +859,7 @@ function loadAdminFormFields() {
 
   // 1. General Tab
   document.getElementById("input-youtube-id").value = siteConfig.youtubeId;
+  document.getElementById("input-ga-id").value = siteConfig.googleAnalyticsId || "";
   document.getElementById("input-trial-link").value = siteConfig.trialLink;
   document.getElementById("input-demo-link").value = siteConfig.demoLink;
   document.getElementById("input-admin-password").value = siteConfig.adminPassword;
@@ -914,6 +945,7 @@ function setupAdminFormInputListeners() {
   const inputs = [
     // General
     { id: "input-youtube-id", key: "youtubeId", type: "global" },
+    { id: "input-ga-id", key: "googleAnalyticsId", type: "global" },
     { id: "input-trial-link", key: "trialLink", type: "global" },
     { id: "input-demo-link", key: "demoLink", type: "global" },
     { id: "input-admin-password", key: "adminPassword", type: "global" },
