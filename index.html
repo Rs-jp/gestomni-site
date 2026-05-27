@@ -25,11 +25,7 @@
   <header id="site-header">
     <div class="container header-container">
       <div class="logo" id="header-logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        <!-- Brand SVG Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-          <polyline points="9 22 9 12 15 12 15 22"></polyline>
-        </svg>
+        <img src="logo.png" alt="Gest'Omni Logo" class="brand-logo-img">
         <span>Gest'Omni</span>
       </div>
       
@@ -180,10 +176,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
+            <img src="logo.png" alt="Gest'Omni Logo" class="brand-logo-img">
             <span>Gest'Omni</span>
           </div>
           <p id="footer-tagline">Empowering local retailers and artisans worldwide to stand strong against global giants.</p>
@@ -287,10 +280,22 @@
 
         <!-- General Settings Tab -->
         <div class="admin-tab-content active" id="tab-general">
+          <div class="form-group" style="border: 1px solid hsl(var(--border)); padding: 12px; border-radius: 6px; margin-bottom: 16px;">
+            <h6 style="color: hsl(var(--primary-hover)); font-size: 0.9rem; margin-bottom: 8px; font-weight: 600;">YouTube Video Settings</h6>
+            <div class="form-group" style="margin-bottom: 10px;">
+              <label for="input-youtube-pt" style="font-size: 0.75rem;">Portuguese Video (PT-BR) Link/ID</label>
+              <input type="text" id="input-youtube-pt" placeholder="e.g. dQw4w9WgXcQ">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label for="input-youtube-en" style="font-size: 0.75rem;">English Video (EN-US) Link/ID</label>
+              <input type="text" id="input-youtube-en" placeholder="e.g. dQw4w9WgXcQ">
+            </div>
+            <small style="color: hsl(var(--text-muted)); font-size: 0.75rem; display: block; margin-top: 8px;">Pasted full links are automatically cleaned to their 11-char IDs.</small>
+          </div>
+          
           <div class="form-group">
-            <label for="input-youtube-id">YouTube Video ID</label>
-            <input type="text" id="input-youtube-id" placeholder="e.g. dQw4w9WgXcQ">
-            <small style="color: hsl(var(--text-muted)); font-size: 0.75rem; margin-top: 4px;">Paste the YouTube video identifier code (found after 'v=' in YouTube URL).</small>
+            <label>Live Exchange Rate (BRL/USD)</label>
+            <input type="text" id="input-live-rate" readonly style="background-color: hsl(var(--bg-dark) / 0.5); color: hsl(var(--secondary-hover)); font-weight: 600;">
           </div>
           <div class="form-group">
             <label for="input-ga-id">Google Analytics ID (Pixel)</label>

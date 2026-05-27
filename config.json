@@ -1,6 +1,7 @@
 {
   "adminPassword": "admin",
-  "youtubeId": "dQw4w9WgXcQ",
+  "youtubeIdPt": "dQw4w9WgXcQ",
+  "youtubeIdEn": "dQw4w9WgXcQ",
   "trialLink": "https://gestomni.com/signup",
   "demoLink": "https://calendly.com/gestomni/demo",
   "googleAnalyticsId": "",

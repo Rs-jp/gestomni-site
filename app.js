@@ -6,7 +6,8 @@
 // (Ensures the page works 100% offline or locally via file:/// protocol without CORS blocks)
 const DEFAULT_CONFIG = {
   adminPassword: "admin",
-  youtubeId: "dQw4w9WgXcQ",
+  youtubeIdPt: "dQw4w9WgXcQ",
+  youtubeIdEn: "dQw4w9WgXcQ",
   trialLink: "https://gestomni.com/signup",
   demoLink: "https://calendly.com/gestomni/demo",
   googleAnalyticsId: "",
@@ -368,6 +369,7 @@ let activeLang = "en"; // Default language
 let isYearlyBilling = false; // Monthly vs Yearly Pricing Toggle State
 let isAdminAuthenticated = false;
 let ytPlayer = null;
+let usdToBrlRate = 5.20; // Live BRL/USD exchange rate, defaults to 5.20 fallback
 
 // --- SVG Icons Map for Features ---
 const FEATURE_ICONS = {
@@ -385,6 +387,7 @@ const FEATURE_ICONS = {
 // --- Initialization / Config Loader ---
 window.addEventListener("DOMContentLoaded", async () => {
   await loadConfiguration();
+  await fetchExchangeRate(); // fetch live exchange rate first!
   detectUserLanguage();
   hydrateDOM();
   initializeGoogleAnalytics();
@@ -417,6 +420,41 @@ function initializeGoogleAnalytics() {
   window.gtag('config', gaId);
   
   console.log(`Google Analytics initialized with ID: ${gaId}`);
+}
+
+/**
+ * Fetches the current USD to BRL exchange rate from public APIs.
+ * Leverages er-api.com and economia.awesomeapi.com.br fallback.
+ */
+async function fetchExchangeRate() {
+  // 1. Primary API: open.er-api.com
+  try {
+    const response = await fetch("https://open.er-api.com/v6/latest/USD");
+    if (response.ok) {
+      const data = await response.json();
+      if (data && data.rates && data.rates.BRL) {
+        usdToBrlRate = parseFloat(data.rates.BRL);
+        console.log(`Live USD/BRL exchange rate: 1 USD = ${usdToBrlRate} BRL`);
+        return;
+      }
+    }
+  } catch (e) {
+    console.warn("er-api.com failed. Trying fallback AwesomeAPI.", e);
+  }
+
+  // 2. Fallback API: AwesomeAPI (popular in Brazil)
+  try {
+    const response = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL");
+    if (response.ok) {
+      const data = await response.json();
+      if (data && data.USDBRL && data.USDBRL.bid) {
+        usdToBrlRate = parseFloat(data.USDBRL.bid);
+        console.log(`Live USD/BRL from fallback: 1 USD = ${usdToBrlRate} BRL`);
+      }
+    }
+  } catch (e) {
+    console.error("All exchange rate APIs failed. Using fallback 5.20", e);
+  }
 }
 
 /**
@@ -590,10 +628,10 @@ function renderPricing(plans, perMonthLabel, perYearLabel, trialBtnLabel) {
   const container = document.getElementById("pricing-container");
   if (!container) return;
 
-  container.innerHTML = plans.map(plan => {
+  const cardsHtml = plans.map(plan => {
     // Show either monthly cost or discounted yearly cost divided by 12, or just yearly cost
-    const priceValue = isYearlyBilling ? Math.round(plan.priceYearly / 12) : plan.priceMonthly;
-    const periodLabel = isYearlyBilling ? perMonthLabel : perMonthLabel; // both show monthly equivalent, or yearly total
+    const priceValueBRL = isYearlyBilling ? Math.round(plan.priceYearly / 12) : plan.priceMonthly;
+    const periodLabel = isYearlyBilling ? perMonthLabel : perMonthLabel;
     
     // Check popular badge
     const popularCardClass = plan.popular ? "pricing-card popular" : "pricing-card";
@@ -603,18 +641,52 @@ function renderPricing(plans, perMonthLabel, perYearLabel, trialBtnLabel) {
 
     const featuresListHtml = plan.features.map(f => `<li>${checkIcon}<span>${f}</span></li>`).join("");
 
+    let priceHtml = "";
+    let subPriceHtml = "";
+
+    if (activeLang === "en") {
+      // English mode: converted to USD and showing BRL as secondary
+      const priceValueUSD = isYearlyBilling 
+        ? ((plan.priceYearly / 12) / usdToBrlRate).toFixed(2) 
+        : (plan.priceMonthly / usdToBrlRate).toFixed(2);
+      
+      const yearlyUSD = (plan.priceYearly / usdToBrlRate).toFixed(2);
+
+      priceHtml = `
+        <span class="pricing-currency">$</span>
+        <span class="pricing-value">${priceValueUSD}</span>
+        <span class="pricing-period">${periodLabel}</span>
+      `;
+      
+      subPriceHtml = `
+        <div style="margin-top: 4px; font-size: 0.85rem; color: text-decoration; color: hsl(var(--text-muted)); font-weight: 500;">
+          Equivalent: <strong>R$ ${priceValueBRL}</strong> / month
+        </div>
+        ${isYearlyBilling ? `<small style="color: hsl(var(--secondary-hover)); font-weight: 600; display:block; margin-top: 4px;">$ ${yearlyUSD} billed annually</small>` : ""}
+      `;
+    } else {
+      // Portuguese mode: clean BRL prices
+      priceHtml = `
+        <span class="pricing-currency">R$</span>
+        <span class="pricing-value">${priceValueBRL}</span>
+        <span class="pricing-period">${periodLabel}</span>
+      `;
+      
+      subPriceHtml = `
+        ${isYearlyBilling ? `<small style="color: hsl(var(--secondary-hover)); font-weight: 600; display:block; margin-top: 4px;">R$ ${plan.priceYearly} cobrado anualmente</small>` : ""}
+      `;
+    }
+
     return `
       <div class="${popularCardClass}">
         ${popularBadgeHtml}
         <div class="pricing-card-header">
           <h3 class="pricing-plan-name">${plan.name}</h3>
-          <div class="pricing-price-container">
-            <span class="pricing-currency">R$</span>
-            <span class="pricing-value">${priceValue}</span>
-            <span class="pricing-period">${periodLabel}</span>
+          <div class="pricing-price-container" style="flex-direction: row; align-items: baseline;">
+            ${priceHtml}
           </div>
-          ${isYearlyBilling ? `<small style="color: hsl(var(--secondary-hover)); font-weight: 600;">R$ ${plan.priceYearly} billed annually</small>` : ""}
-          <p class="pricing-card-description">${plan.description}</p>
+          ${subPriceHtml}
+          <p class="pricing-card-description" style="margin-top: 15px;">${plan.description}</p>
         </div>
         <div class="pricing-divider"></div>
         <ul class="pricing-features-list">
@@ -624,6 +696,25 @@ function renderPricing(plans, perMonthLabel, perYearLabel, trialBtnLabel) {
       </div>
     `;
   }).join("");
+
+  let exchangeRateNoteHtml = "";
+  if (activeLang === "en") {
+    exchangeRateNoteHtml = `
+      <div style="grid-column: 1 / -1; text-align: center; margin-top: 30px; font-size: 0.85rem; color: hsl(var(--text-muted)); font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background-color: hsl(var(--secondary-hover));"></span>
+        <span>Live Exchange Rate: <strong>1 USD = ${usdToBrlRate.toFixed(4)} BRL</strong> (Fetched from open.er-api.com)</span>
+      </div>
+    `;
+  } else {
+    exchangeRateNoteHtml = `
+      <div style="grid-column: 1 / -1; text-align: center; margin-top: 30px; font-size: 0.85rem; color: hsl(var(--text-muted)); font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background-color: hsl(var(--secondary-hover));"></span>
+        <span>Valores baseados em Real brasileiro (R$). Conversão automática ativa para dólares (USD).</span>
+      </div>
+    `;
+  }
+
+  container.innerHTML = cardsHtml + exchangeRateNoteHtml;
 }
 
 /**
@@ -737,7 +828,8 @@ function loadYoutubeVideo() {
 }
 
 function createYtPlayer() {
-  const cleanId = extractYoutubeId(siteConfig.youtubeId);
+  const videoId = activeLang === "pt" ? siteConfig.youtubeIdPt : siteConfig.youtubeIdEn;
+  const cleanId = extractYoutubeId(videoId);
   ytPlayer = new YT.Player("player-container", {
     videoId: cleanId,
     playerVars: {
@@ -903,7 +995,9 @@ function loadAdminFormFields() {
   const t = siteConfig[editLang];
 
   // 1. General Tab
-  document.getElementById("input-youtube-id").value = siteConfig.youtubeId;
+  document.getElementById("input-youtube-pt").value = siteConfig.youtubeIdPt || "";
+  document.getElementById("input-youtube-en").value = siteConfig.youtubeIdEn || "";
+  document.getElementById("input-live-rate").value = `1 USD = ${usdToBrlRate.toFixed(4)} BRL`;
   document.getElementById("input-ga-id").value = siteConfig.googleAnalyticsId || "";
   document.getElementById("input-trial-link").value = siteConfig.trialLink;
   document.getElementById("input-demo-link").value = siteConfig.demoLink;
@@ -989,7 +1083,8 @@ function loadAdminFormFields() {
 function setupAdminFormInputListeners() {
   const inputs = [
     // General
-    { id: "input-youtube-id", key: "youtubeId", type: "global" },
+    { id: "input-youtube-pt", key: "youtubeIdPt", type: "global" },
+    { id: "input-youtube-en", key: "youtubeIdEn", type: "global" },
     { id: "input-ga-id", key: "googleAnalyticsId", type: "global" },
     { id: "input-trial-link", key: "trialLink", type: "global" },
     { id: "input-demo-link", key: "demoLink", type: "global" },
@@ -1031,7 +1126,7 @@ function setupAdminFormInputListeners() {
       const value = e.target.value;
 
       let cleanedValue = value;
-      if (item.key === "youtubeId") {
+      if (item.key === "youtubeIdPt" || item.key === "youtubeIdEn") {
         cleanedValue = extractYoutubeId(value);
       }
 
@@ -1051,7 +1146,8 @@ function setupAdminFormInputListeners() {
       }
 
       // If YouTube ID edited, reload player if active
-      if (item.key === "youtubeId" && ytPlayer) {
+      const activeVideoKey = activeLang === "pt" ? "youtubeIdPt" : "youtubeIdEn";
+      if (item.key === activeVideoKey && ytPlayer) {
         try {
           ytPlayer.destroy();
           loadYoutubeVideo();

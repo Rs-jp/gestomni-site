@@ -8,34 +8,34 @@
 /* --- Design Tokens / CSS Variables --- */
 :root {
   /* Colors */
-  --bg-dark: 240 10% 3.9%;
-  --bg-card: 240 10% 6%;
-  --bg-card-hover: 240 10% 9%;
+  --bg-dark: 222 47% 4%;
+  --bg-card: 222 47% 6%;
+  --bg-card-hover: 222 47% 9%;
   
-  --primary: 263 70% 50%;
-  --primary-hover: 263 70% 58%;
-  --primary-glow: rgba(139, 92, 246, 0.15);
+  --primary: 215 73% 31%;
+  --primary-hover: 215 73% 40%;
+  --primary-glow: rgba(21, 72, 135, 0.15);
   
-  --secondary: 142 70% 45%;
-  --secondary-hover: 142 70% 52%;
+  --secondary: 200 95% 48%;
+  --secondary-hover: 200 95% 55%;
   
   --text-primary: 0 0% 98%;
-  --text-secondary: 240 5% 65%;
-  --text-muted: 240 5% 45%;
+  --text-secondary: 220 15% 65%;
+  --text-muted: 220 10% 45%;
   
-  --border: 240 5% 15%;
-  --border-focus: 263 70% 50%;
-  --glass-bg: rgba(9, 9, 11, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.06);
+  --border: 220 15% 15%;
+  --border-focus: 215 73% 31%;
+  --glass-bg: rgba(7, 10, 19, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.05);
   
   /* Fonts */
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
   
   /* Layout & Transitions */
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 24px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -220,6 +220,12 @@ header {
   cursor: pointer;
 }
 
+.brand-logo-img {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
 .logo svg {
   stroke: hsl(var(--primary));
   filter: drop-shadow(0 0 8px hsl(var(--primary) / 0.5));
@@ -391,7 +397,9 @@ nav {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, hsl(var(--bg-card)) 0%, hsl(var(--bg-dark)) 100%);
+  background-image: linear-gradient(rgba(7, 10, 19, 0.4), rgba(7, 10, 19, 0.8)), url('video_cover.png');
+  background-size: cover;
+  background-position: center;
   display: flex;
   flex-direction: column;
   align-items: center;
