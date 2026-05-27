@@ -214,15 +214,20 @@ header {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 800;
+  cursor: pointer;
+}
+
+.logo span {
   background: linear-gradient(135deg, #fff 0%, hsl(var(--text-secondary)) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  cursor: pointer;
 }
 
 .brand-logo-img {
   height: 38px;
-  width: auto;
+  width: 56px;
+  min-width: 56px;
+  flex-shrink: 0;
   object-fit: contain;
 }
 
