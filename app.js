@@ -799,6 +799,9 @@ function setupEventListeners() {
   // Dynamic Live Admin Forms Input Listening (Saves immediately to local storage on change!)
   setupAdminFormInputListeners();
 
+  // Admin Save Button Action
+  document.getElementById("admin-save-btn").addEventListener("click", saveConfigurationLocally);
+
   // Admin Export / Reset Buttons Actions
   document.getElementById("admin-download-btn").addEventListener("click", downloadConfiguration);
   document.getElementById("admin-reset-btn").addEventListener("click", resetConfigurationToDefaults);
@@ -993,8 +996,7 @@ function setupAdminFormInputListeners() {
         siteConfig[editLang][section][subkey] = value;
       }
 
-      // 1. Live preview: immediately save state to localStorage
-      localStorage.setItem("gestomni_landing_config", JSON.stringify(siteConfig));
+      // 1. Live preview: in-memory state updated
       
       // 2. Hydrate only if editing matches display language
       if (editLang === activeLang) {
@@ -1026,8 +1028,7 @@ function savePlanPriceEdits(e) {
     siteConfig[editLang].pricing.plans[index].priceYearly = val;
   }
 
-  // Save and Live re-render
-  localStorage.setItem("gestomni_landing_config", JSON.stringify(siteConfig));
+  // Live re-render (in-memory)
   if (editLang === activeLang) {
     hydrateDOM();
   }
@@ -1047,8 +1048,7 @@ function saveFaqEdits(e) {
     siteConfig[editLang].faq.items[index].a = val;
   }
 
-  // Save and Live re-render
-  localStorage.setItem("gestomni_landing_config", JSON.stringify(siteConfig));
+  // Live re-render (in-memory)
   if (editLang === activeLang) {
     hydrateDOM();
   }
@@ -1077,5 +1077,45 @@ function resetConfigurationToDefaults() {
     
     localStorage.removeItem("gestomni_landing_config");
     window.location.reload();
+  }
+}
+
+/**
+ * Saves active configurations in memory to browser localStorage.
+ * Displays a beautiful visual toast for confirmation.
+ */
+function saveConfigurationLocally() {
+  try {
+    localStorage.setItem("gestomni_landing_config", JSON.stringify(siteConfig));
+    
+    // Play visual toast
+    const toast = document.getElementById("admin-save-toast");
+    const toastText = document.getElementById("admin-toast-text");
+    
+    if (toast && toastText) {
+      toastText.textContent = activeLang === "pt" 
+        ? "Alterações salvas com sucesso no navegador! Para publicar online, baixe o config.json." 
+        : "Changes saved successfully in browser! To publish, download config.json.";
+        
+      toast.style.display = "flex";
+      
+      // Flash save button green for immediate feedback
+      const saveBtn = document.getElementById("admin-save-btn");
+      if (saveBtn) {
+        const originalBg = saveBtn.style.backgroundColor;
+        saveBtn.style.backgroundColor = "hsl(142, 70%, 40%)";
+        setTimeout(() => {
+          saveBtn.style.backgroundColor = "";
+        }, 1000);
+      }
+
+      // Hide toast after 3.5 seconds
+      setTimeout(() => {
+        toast.style.display = "none";
+      }, 3500);
+    }
+  } catch (error) {
+    console.error("Failed to save config to local storage", error);
+    alert(activeLang === "pt" ? "Erro ao salvar alterações no navegador." : "Error saving changes to browser.");
   }
 }
